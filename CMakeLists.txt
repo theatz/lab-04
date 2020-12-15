@@ -19,7 +19,7 @@ HunterGate(
 )
 
 # TODO: rename project and delete this comment
-project(template)
+project(exp)
 string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
@@ -27,25 +27,34 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
+hunter_add_package(Boost COMPONENTS filesystem)
+find_package(Boost CONFIG REQUIRED filesystem)
+
 # TODO: change template word to project name and delete this comment
-add_library(template STATIC
+add_library(explorer STATIC
   # enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
-)
+  ${CMAKE_CURRENT_SOURCE_DIR}/sources/Explorer.cpp
+        )
+
+target_link_libraries(explorer Boost::filesystem)
+
+target_include_directories(explorer
+        PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+        )
+
+add_executable(main
+        # TODO: enum your files and delete this comment
+        ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp
+        )
+
+target_link_libraries(main explorer)
+
 add_executable(tests
   # TODO: enum your files and delete this comment
   ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
 )
 
-# TODO: change template word to project name and delete this comment
-target_include_directories(template
-  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-target_include_directories(tests
-  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-# TODO: change template word to project name and delete this comment
-target_link_libraries(tests GTest::gtest_main template)
+target_link_libraries(tests GTest::gtest_main explorer)
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests)
@@ -55,7 +64,7 @@ if(BUILD_COVERAGE)
   list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/coverage/cmake")
   find_package(codecov)
   # TODO: change template word to project name and delete this comment
-  add_coverage(template)
+  add_coverage(explorer)
   add_coverage(tests)
   coverage_evaluate()
 endif()
