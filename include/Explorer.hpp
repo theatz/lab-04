@@ -8,6 +8,13 @@
 #include <vector>
 #include <boost/filesystem.hpp>
 #include <iostream>
+#include <utility>
+
+using boost::filesystem::path;
+using boost::filesystem::filesystem_error;
+using boost::filesystem::directory_iterator;
+//using boost::
+using boost::filesystem::directory_entry;
 
 struct account{
   std::vector<std::string> balance;
@@ -19,10 +26,18 @@ struct account{
 class Explorer
 {
  public:
-  Explorer();
+  Explorer(std::string& dirPath);
   ~Explorer();
+  void Analyze();
+  void AccPush(const account& tempAcc);
+  void FileAnalyze(const path& filePath);
+  void PathAnalyze(const directory_entry& dirEntry);
+  bool NameAnalyze(const path& filePath);
+  bool isNumber(const std::string& fileNamePart);
  private:
   std::vector<struct account> _trader;
+  path _path;
+  directory_iterator _dirIterator;
 };
 
 #endif  // TEMPLATE_EXPLORER_HPP

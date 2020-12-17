@@ -6,14 +6,17 @@
 #include <iostream>
 
 int main(int argc, char* argv[]) {
-  std::string path = ".";
+  std::string path = "../misc/ftp/bcs";
+  Explorer exp(path);
+  exp.Analyze();
+
   if (argc == 0) {
     //pathToLookupDirectory = argv[1];
     std::cout << path << std::endl;
   }
 
   if (argc == 1) {
-    path = argv[1];
+    path = argv[0];
     std::cout << path << std::endl;
   }
 
