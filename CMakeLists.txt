@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.4)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(BUILD_COVERAGE "Build coverage" OFF)
+option(BUILD_COVERAGE "Build coverage" ON)
 
 set(
   HUNTER_CACHE_SERVERS
@@ -18,7 +18,7 @@ HunterGate(
   SHA1 "35fa55bc1dfcf9f4d7264f8bb26cd1759ce1ae07"
 )
 
-# TODO: rename project and delete this comment
+
 project(exp)
 string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
@@ -30,9 +30,8 @@ find_package(GTest CONFIG REQUIRED)
 hunter_add_package(Boost COMPONENTS filesystem)
 find_package(Boost CONFIG REQUIRED filesystem)
 
-# TODO: change template word to project name and delete this comment
+
 add_library(explorer STATIC
-  # enum your files and delete this comment
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/Explorer.cpp
         )
 
@@ -43,14 +42,12 @@ target_include_directories(explorer
         )
 
 add_executable(main
-        # TODO: enum your files and delete this comment
         ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp
         )
 
 target_link_libraries(main explorer)
 
 add_executable(tests
-  # TODO: enum your files and delete this comment
   ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
 )
 
@@ -63,7 +60,7 @@ if(BUILD_COVERAGE)
   set(ENABLE_COVERAGE ON CACHE BOOL "Enable coverage build." FORCE)
   list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/coverage/cmake")
   find_package(codecov)
-  # TODO: change template word to project name and delete this comment
+
   add_coverage(explorer)
   add_coverage(tests)
   coverage_evaluate()
