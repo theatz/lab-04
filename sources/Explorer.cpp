@@ -139,12 +139,6 @@ void Explorer::FileAnalyze(const path& filePath)
       tempAcc.bal_id = br;
 
       AccPush(tempAcc);
-
-      /*
-      std::cout << filePath.filename() << std::endl;
-      std::cout << "FIleAnalyze " <<  br << " " << acc << std::endl;
-      */
-
   }
 }
 
