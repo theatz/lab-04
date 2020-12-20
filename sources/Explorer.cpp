@@ -33,6 +33,11 @@ void Explorer::AccPush(const account& tempAcc)
 void Explorer::PathAnalyze(const directory_entry& dirEntry)
 {
   if (is_regular_file(dirEntry)) FileAnalyze(dirEntry.path());
+  if (is_directory(dirEntry)) DirAnalyze(dirEntry);
+  if (is_symlink(dirEntry.path()))
+  {
+    std::cout << "Symlink " << read_symlink(dirEntry.path()).filename() << std::endl;
+  }
 }
 
 bool Explorer::isNumber(const std::string& fileNamePart)
@@ -94,15 +99,24 @@ bool Explorer::NameAnalyze(const path& filePath) {
 
 void Explorer::FileAnalyze(const path& filePath)
 {
+  account tempAcc;
+  tempAcc.balance.clear();
   if (NameAnalyze(filePath)) std::cout << filePath.filename() << std::endl;
+}
+
+void Explorer::DirAnalyze(const directory_entry& dirPath)
+{
+  std::cout << "DirAnalyze " << dirPath.path() << std::endl;
+  directory_iterator dirIterator = directory_iterator(dirPath.path());
+  for (const directory_entry& x : dirIterator)
+  {
+    PathAnalyze(x);
+  }
 }
 
 void Explorer::Analyze()
 {
-  account tempAcc;
-  tempAcc.balance.clear();
-
-  for (const auto& x : _dirIterator)
+  for (const directory_entry& x : _dirIterator)
   {
     PathAnalyze(x);
   }

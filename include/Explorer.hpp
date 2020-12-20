@@ -32,6 +32,7 @@ class Explorer
   void AccPush(const account& tempAcc);
   void FileAnalyze(const path& filePath);
   void PathAnalyze(const directory_entry& dirEntry);
+  void DirAnalyze(const directory_entry& dirPath);
   bool NameAnalyze(const path& filePath);
   bool isNumber(const std::string& fileNamePart);
  private:

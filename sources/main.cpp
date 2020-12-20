@@ -6,7 +6,7 @@
 #include <iostream>
 
 int main(int argc, char* argv[]) {
-  std::string path = "../misc/ftp/bcs";
+  std::string path = "../misc/ftp";
   Explorer exp(path);
   exp.Analyze();
 
