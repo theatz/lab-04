@@ -9,6 +9,7 @@
 #include <boost/filesystem.hpp>
 #include <iostream>
 #include <utility>
+#include <algorithm>
 
 using boost::filesystem::path;
 using boost::filesystem::filesystem_error;
@@ -20,6 +21,7 @@ struct account{
   std::vector<std::string> balance;
   uint32_t file_count;
   std::string acc_id;
+  std::string bal_id;
   std::string last_date;
 };
 
@@ -35,6 +37,7 @@ class Explorer
   void DirAnalyze(const directory_entry& dirPath);
   bool NameAnalyze(const path& filePath);
   bool isNumber(const std::string& fileNamePart);
+  void OutPut();
  private:
   std::vector<struct account> _trader;
   path _path;

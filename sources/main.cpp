@@ -9,6 +9,7 @@ int main(int argc, char* argv[]) {
   std::string path = "../misc/ftp";
   Explorer exp(path);
   exp.Analyze();
+  exp.OutPut();
 
   if (argc == 0) {
     //pathToLookupDirectory = argv[1];
