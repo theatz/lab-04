@@ -23,7 +23,7 @@ project(exp)
 string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
-string(APPEND CMAKE_CXX_FLAGS " -lgcov —coverage")
+string(APPEND CMAKE_CXX_FLAGS " -lgcov --coverage")
 
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
