@@ -48,7 +48,8 @@ void Explorer::PathAnalyze(const directory_entry& dirEntry)
   if (is_directory(dirEntry)) DirAnalyze(dirEntry);
   if (is_symlink(dirEntry))
   {
-    std::cout << "Symlink " << read_symlink(dirEntry.path()).filename() << std::endl;
+    PathAnalyze(directory_entry{read_symlink(dirEntry.path())});
+    //std::cout << "Symlink " << read_symlink(dirEntry.path()).filename() << std::endl;
   }
 }
 

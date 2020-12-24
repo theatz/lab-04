@@ -18,7 +18,6 @@ int main(int argc, char* argv[]) {
   if (argc == 2)
   {
     path = argv[1];
-    //std::cout << path << std::endl;
     Explorer exp(path);
     exp.Analyze();
     exp.OutPut();
