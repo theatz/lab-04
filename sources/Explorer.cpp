@@ -12,7 +12,6 @@ Explorer::Explorer(std::string &dirPath)
   } catch (...) {
     _path = path(".");
     _dirIterator = directory_iterator(_path);
-
   }
 }
 
